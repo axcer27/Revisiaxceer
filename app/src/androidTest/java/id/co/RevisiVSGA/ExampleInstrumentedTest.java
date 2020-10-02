@@ -1,4 +1,4 @@
-package id.co.RevisiGamePuzzle;
+package id.co.RevisiVSGA;
 
 import android.content.Context;
 

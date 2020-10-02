@@ -1,4 +1,4 @@
-package id.co.RevisiGamePuzzle;
+package id.co.RevisiVSGA;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,59 +20,59 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     public GridLayout gridLayout;
-    public int jarak;
-    public ArrayList<String> hasil;
-    public ArrayList<String> truehasil;
+    public int adds;
+    public ArrayList<String> jawaban;
+    public ArrayList<String> jawabanbenar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        definetruehasil();
+        definejawabanbenar();
         startGame();
     }
 
-    public void definetruehasil(){
-        truehasil = new ArrayList<>();
-        truehasil.add("A");
-        truehasil.add("B");
-        truehasil.add("C");
-        truehasil.add("D");
-        truehasil.add("E");
-        truehasil.add("F");
-        truehasil.add("G");
-        truehasil.add("H");
-        truehasil.add("I");
-        truehasil.add("J");
-        truehasil.add("K");
-        truehasil.add("L");
-        truehasil.add("M");
-        truehasil.add("N");
-        truehasil.add("O");
-        truehasil.add(" ");
-        Log.i("Correct hasil", String.valueOf(truehasil));
+    public void definejawabanbenar(){
+        jawabanbenar = new ArrayList<>();
+        jawabanbenar.add("A");
+        jawabanbenar.add("B");
+        jawabanbenar.add("C");
+        jawabanbenar.add("D");
+        jawabanbenar.add("E");
+        jawabanbenar.add("F");
+        jawabanbenar.add("G");
+        jawabanbenar.add("H");
+        jawabanbenar.add("I");
+        jawabanbenar.add("J");
+        jawabanbenar.add("K");
+        jawabanbenar.add("L");
+        jawabanbenar.add("M");
+        jawabanbenar.add("N");
+        jawabanbenar.add("O");
+        jawabanbenar.add(" ");
+        Log.i("Correct jawaban", String.valueOf(jawabanbenar));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void startGame(){
         gridLayout = findViewById(R.id.gridLayout);
         gridLayout.removeAllViews();
-        hasil = new ArrayList<>();
-        hasil = (ArrayList<String>) truehasil.clone();
-        Collections.shuffle(hasil);
+        jawaban = new ArrayList<>();
+        jawaban = (ArrayList<String>) jawabanbenar.clone();
+        Collections.shuffle(jawaban);
 
         for (int i = 0; i<16; i++) {
             final Button button = new Button(this);
-            button.setBackground(getDrawable(R.drawable.background));
-            button.setTextColor(getColor(R.color.green));
-            button.setText(hasil.get(i));
+            button.setBackground(getDrawable(R.drawable.warna_btn));
+            button.setTextColor(getColor(R.color.dark));
+            button.setText(jawaban.get(i));
             final int  jes = i;
-            if (hasil.get(i).equals(" ")) {
-                jarak = i;
+            if (jawaban.get(i).equals(" ")) {
+                adds = i;
             }
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int ax = hasil.indexOf(" ");
+                    int ax = jawaban.indexOf(" ");
                     int atas =  jes - 4;
                     int bawah =  jes + 4;
                     int kiri =  jes - 1;
@@ -95,15 +95,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchButton(int index, int es){
-        Collections.swap(hasil, index, es);
+        Collections.swap(jawaban, index, es);
 
         Button emptyBtn = (Button) gridLayout.getChildAt(es);
-        emptyBtn.setText(hasil.get(es));
+        emptyBtn.setText(jawaban.get(es));
 
         Button changeBtn = (Button) gridLayout.getChildAt(index);
-        changeBtn.setText(hasil.get(index));
+        changeBtn.setText(jawaban.get(index));
 
-        Log.i("hasil", String.valueOf(hasil));
+        Log.i("jawaban", String.valueOf(jawaban));
         if (check()){
             showSnackBar();
         }
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean check(){
-        return truehasil.equals(hasil);
+        return jawabanbenar.equals(jawaban);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,4 +1,4 @@
-package id.co.RevisiGamePuzzle;
+package id.co.RevisiVSGA;
 
 import org.junit.Test;
 
